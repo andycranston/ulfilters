@@ -5,11 +5,9 @@ sed/awk/...other pipe then let me know :-]
 
 Seriously I am sure some of these C filter style programs can be replaced
 with a shell pipe solution with standard tools like sed and awk so please
-let me know.
-
-People (including me!) may be in a situation when compiling
-our own filter solution is not possible so a shell alternative will
-be most welcome.
+let me know.  People (including me!) may be in a situation when compiling
+our own filter solution is not possible so a shell alternative will be
+most welcome.
 
 ## The filters
 
@@ -21,7 +19,7 @@ Read two or more lines of stdin and output CSV format.
 
 ### linefold
 
-Read two or more lines of std and output those lines joined together.
+Read two or more lines of stdin and output those lines joined together.
 
 ### linesafter
 
@@ -31,7 +29,7 @@ the rest of the lines.
 ### linesbefore
 
 Read lines from stdin and output them unless the line contains a specified
-string. When/if the line with that specified string is read in then stop.
+string. When/if the line with that specified string is read then stop.
 
 ### unfind
 
@@ -58,6 +56,14 @@ chmod u=rwx,go=rx $HOME/bin/unfind
 Do whatever you need for your system and environment.
 
 ### csvfold
+
+Input is:
+
+```
+
+```
+
+
 
 zzz
 
