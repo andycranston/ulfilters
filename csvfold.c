@@ -12,8 +12,6 @@
 
 #define MAX_LINE_LENGTH 8192
 
-char *progname;
-
 /************************************************************/
 
 void removenewline(s)
