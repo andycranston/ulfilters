@@ -1,5 +1,5 @@
 /*
- *  linefold.c, version 001, 28-november-2018
+ *  linefold.c, version 002, 30-november-2018
  *
  *  fold lines from stdin into fewer lines
  *
