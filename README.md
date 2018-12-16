@@ -1,87 +1,194 @@
 # ulfilters
 
-UNIX / Linux filter programs - if you can replace any of them with a
-sed/awk/...other pipe then let me know :-]
+A range of UNIX/Linux filter programs written in C.
 
-Seriously I am sure some of these C filter style programs can be replaced
-with a shell pipe solution with standard tools like sed and awk so please
-let me know.  People (including me!) may be in a situation when compiling
-our own filter solution is not possible so a shell alternative will be
-most welcome.
+They are:
 
-## The filters
++ csvfold - read two or more lines of stdin and output in CSV format.
 
-They (currently) are:
++ linefold - read two or more lines of stdin and output those lines joined together.
 
-### csvfold
++ linesafter - read lines from stdin and when a line contains a specified string output the rest of the lines.
 
-Read two or more lines of stdin and output CSV format.
++ linesbefore - read lines from stdin and output them until the line contains a specified string.
 
-### linefold
++ unfind - remove lines that match a path name and all subdirectories below that path name.
 
-Read two or more lines of stdin and output those lines joined together.
+## Compiling
 
-### linesafter
-
-Read lines from stdin until a line contains a specified string and then output
-the rest of the lines.
-
-### linesbefore
-
-Read lines from stdin and output them unless the line contains a specified
-string. When/if the line with that specified string is read then stop.
-
-### unfind
-
-My favourite - the oldest bit of my code ever published on the Internet - see, it's right here:
-
-[A pipe by Andy Cranston to remove name files and directories from stdin](http://www.lovelady.com/unixsrc/#unfind)
-
-High five Dennis :-]
-
-## More detail
-
-OK below is more detail on using each of these filters.
-
-First though a note that all the filters are standalone C programs so can
-they be compiled with a single run of your C compiler.  For example to
-compile the `unfind` filter on a Linux system you would do something like:
+Use the make file as follows:
 
 ```
-gcc -o unfind unfind.c
-cp unfind $HOME/bin/unfind
-chmod u=rwx,go=rx $HOME/bin/unfind
+make
+make userinstall
 ```
 
-Do whatever you need for your system and environment.
+The `make` command compiles to the current directory.  The `make userinstall` copies
+the compiled filters to `$HOME/bin`.
 
-### csvfold
+## More details
 
-Input is:
+The following sections have more details for each filter program.
+
+## csvfold
+
+Input file `file.txt`:
 
 ```
-
+7
+Apple
+Shop
+10
+Pear
+Supermarket
+25
+Pineapple
+Greengrocer
 ```
 
+Command line:
 
+```
+cat file.txt | csvfold 3
+```
 
-zzz
+Output:
 
-### linefold
+```
+"7","Apple","Shop"
+"10","Pear","Supermarket"
+"25","Pineapple","Greengrocer"
+```
 
-zzz
+## linefold
 
-### linesafter
+Input file `file.txt`:
 
-zzz
+```
+7
+Apple
+Shop
+10
+Pear
+Supermarket
+25
+Pineapple
+Greengrocer
+```
 
-### linesbefore
+Command line:
 
-zzz
+```
+cat file.txt | linefold -n 3
+```
 
-### unfind
+Output:
 
-zzz
+```
+7 Apple Shop
+10 Pear Supermarket
+25 Pineapple Greengrocer
+```
+
+Command line:
+
+```
+cat file.txt | linefold -n 3 -d :
+```
+
+Output:
+
+```
+7:Apple:Shop
+10:Pear:Supermarket
+25:Pineapple:Greengrocer
+```
+
+## linesafter
+
+Input file `file.txt`:
+
+```
+Tree
+Flower
+Daisy
+Bush
+Grass
+Barley
+Thistle
+```
+
+Command line:
+
+```
+cat file.txt | linesafter Bush
+```
+
+Output:
+
+```
+Grass
+Barley
+Thistle
+```
+
+## linesbefore
+
+Input file `file.txt`:
+
+```
+Tree
+Flower
+Daisy
+Bush
+Grass
+Barley
+Thistle
+```
+
+Command line:
+
+```
+cat file.txt | linesbefore Bush
+```
+
+Output:
+
+```
+Grass
+Barley
+Thistle
+```
+## unfind
+
+Input file `file.txt`:
+
+```
+dir1
+dir1/foo
+dir1/stuff
+dir2
+dir2/filea
+dir2/fileb
+dir2/filec
+file
+exclude
+```
+
+Command line:
+
+```
+cat file.txt | unfind dir1 dir2/fileb exclude
+```
+
+Output:
+
+```
+dir2
+dir2/filea
+dir2/filec
+file
+```
 
 -------------------------------------------------------------
 
