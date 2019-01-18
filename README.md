@@ -12,6 +12,8 @@ They are:
 
 + linesbefore - read lines from stdin and output them until the line contains a specified string.
 
++ trimws - read lines from stdin, remove any leading and trailing white space and then output them.
+
 + unfind - remove lines that match a path name and all subdirectories below that path name.
 
 ## Compiling
@@ -23,8 +25,8 @@ make
 make userinstall
 ```
 
-The `make` command compiles to the current directory.  The `make userinstall` copies
-the compiled filters to `$HOME/bin`.
+The `make` command compiles to the current directory.  The `make
+userinstall` copies the compiled filters to `$HOME/bin`.
 
 ## More details
 
@@ -159,6 +161,39 @@ Grass
 Barley
 Thistle
 ```
+
+## trimws
+
+Input file `file.txt`:
+
+```
+Tree
+ Flower
+	Daisy
+        Bush
+Grass
+    Barley
+Thistle
+```
+
+Command line:
+
+```
+cat file.txt | trimws
+```
+
+Output:
+
+```
+Tree
+Flower
+Daisy
+Bush
+Grass
+Barley
+Thistle
+```
+
 ## unfind
 
 Input file `file.txt`:
