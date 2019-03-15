@@ -1,0 +1,27 @@
+.TH unfind 1
+.SH NAME
+unfind \- remove named files/directories from stdin and their subdirectories
+.SH SYNOPSIS
+unfind [ file/directory ... ]
+.SH DESCRIPTION
+The unfind command is designed to be used in a pipe after the find
+command.  The output of the find command (when used with the -print
+option) is piped into the unfind command.  The arguments to unfind
+name files and/or directories which should be removed (i.e. 'unfound').
+Exact matches are removed as expected.  A line which looks like a
+sub-directory is also removed so sub-directories are, in effect,
+recursively removed.  Filenames on stdin which do not satisfy the
+unmatching criteria are output on stdout unchanged.
+.SH EXAMPLES
+A good use of unfind is to remove files found by find.  For example, to remove
+the files under /dev from a file list which is to be used for a backup use
+something like this:
+.IP
+find / -print | unfind /dev | cpio ...
+.PP
+The resulting archive will NOT have any /dev special files in it.
+.SH SOURCE
+The unfind command is a single source C program.
+.br
+@(#) MCL unfind, GENERIC, version 001, 13-MAR-96
+.br
