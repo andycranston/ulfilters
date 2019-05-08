@@ -1,6 +1,11 @@
-All: csvfold linesafter linesbefore linefold trimws unfind
+All: chars csvfold linesafter linesbefore linefold trimws unfind
 	@sleep 1
 	touch All
+
+chars: chars.c
+	gcc -o chars chars.c
+
+chars.c:
 
 csvfold: csvfold.c
 	gcc -o csvfold csvfold.c
@@ -33,6 +38,8 @@ unfind: unfind.c
 unfind.c:
 
 userinstall:
+	cp -p chars           $(HOME)/bin/chars
+	chmod u=rwx,go=rx     $(HOME)/bin/chars
 	cp -p csvfold         $(HOME)/bin/csvfold
 	chmod u=rwx,go=rx     $(HOME)/bin/csvfold
 	cp -p linefold        $(HOME)/bin/linefold
