@@ -4,6 +4,8 @@ A range of UNIX/Linux filter programs written in C.
 
 They are:
 
++ chars - display a count of each character that appears in stdin.
+
 + csvfold - read two or more lines of stdin and output in CSV format.
 
 + linefold - read two or more lines of stdin and output those lines joined together.
@@ -31,6 +33,30 @@ userinstall` copies the compiled filters to `$HOME/bin`.
 ## More details
 
 The following sections have more details for each filter program.
+
+## chars
+
+Input `file.txt`:
+
+```
+hello
+```
+
+Command line:
+
+```
+cat file.txt | chars
+```
+
+Output:
+
+```
+  10  \n 1
+ 101  e  1
+ 104  h  1
+ 108  l  2
+ 111  o  1
+```
 
 ## csvfold
 
